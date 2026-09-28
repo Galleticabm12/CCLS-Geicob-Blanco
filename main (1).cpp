@@ -19,9 +19,8 @@ void completarTarea(vector<Tarea>& tareas);
 
 int main() {
     vector<Tarea> tareas;
-    int opcion = 0; // Inicializado para evitar basura en memoria
-
-    while (opcion != 4) { // Corregido: 4 es la opción para salir
+    int opcion = 0; 
+    while (opcion != 4) { 
         cout << "\nLISTA DE TAREAS\n\n";
         cout << "1. Agregar tarea\n";
         cout << "2. Mostrar tareas\n";
@@ -63,7 +62,7 @@ void agregarTarea(vector<Tarea>& tareas) {
     cout << "Ingrese la prioridad (Alta/Media/Baja): ";
     getline(cin, prioridad);
     
-    // Normalizar texto: primera letra mayúscula, resto minúscula
+   
     if (!prioridad.empty()) {
         prioridad[0] = toupper(prioridad[0]);
         for (size_t i = 1; i < prioridad.length(); i++) {
@@ -89,7 +88,7 @@ void mostrarTareas(const vector<Tarea>& tareas) {
 
     cout << "\n--- TAREAS ---\n";
     for (size_t i = 0; i < tareas.size(); i++) {
-        // Formato exacto requerido: [Estado] [Prioridad] Descripción
+      
         cout << i + 1 << ". ["
              << (tareas[i].completada ? "Completada" : "Pendiente") << "] ["
              << tareas[i].prioridad << "] "
