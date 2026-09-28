@@ -12,16 +12,16 @@ struct Tarea {
     string prioridad;
 };
 
-// Protoripos
+// Prototipos
 void agregarTarea(vector<Tarea>& tareas);
 void mostrarTareas(const vector<Tarea>& tareas);
 void completarTarea(vector<Tarea>& tareas);
 
 int main() {
     vector<Tarea> tareas;
-    int opcion;
+    int opcion = 0; // Inicializado para evitar basura en memoria
 
-    while (opcion != 5) {
+    while (opcion != 4) { // Corregido: 4 es la opción para salir
         cout << "\nLISTA DE TAREAS\n\n";
         cout << "1. Agregar tarea\n";
         cout << "2. Mostrar tareas\n";
@@ -60,7 +60,7 @@ void agregarTarea(vector<Tarea>& tareas) {
     cout << "\nIngrese la descripción de la tarea: ";
     getline(cin, descripcion);
     
-    cout << "Ingrese la prioridad (Alto/Medio/Bajo): ";
+    cout << "Ingrese la prioridad (Alta/Media/Baja): ";
     getline(cin, prioridad);
     
     // Normalizar texto: primera letra mayúscula, resto minúscula
@@ -89,19 +89,24 @@ void mostrarTareas(const vector<Tarea>& tareas) {
 
     cout << "\n--- TAREAS ---\n";
     for (size_t i = 0; i < tareas.size(); i++) {
+        // Formato exacto requerido: [Estado] [Prioridad] Descripción
         cout << i + 1 << ". ["
-             << (tareas[i].completada ? "X" : " ")
-             << "] " << tareas[i].descripcion
-             << " [" << tareas[i].prioridad << "]"
-             << "\n";
+             << (tareas[i].completada ? "Completada" : "Pendiente") << "] ["
+             << tareas[i].prioridad << "] "
+             << tareas[i].descripcion << "\n";
     }
     cout << "----------------\n";
 }
 
 void completarTarea(vector<Tarea>& tareas) {
+    if (tareas.empty()) {
+        cout << "\nNo hay tareas para completar.\n";
+        return;
+    }
+
     mostrarTareas(tareas);
     
-    int numeroTarea;
+    size_t numeroTarea;
     cout << "\nIngrese el número de la tarea a completar: ";
     cin >> numeroTarea;
     cin.ignore();
